@@ -28,7 +28,7 @@
         <!-- Right navbar links -->
         <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-                <a class="nav-link" href="#">Xin chào, Admin</a>
+                <a class="nav-link" href="#">Xin chào, {{ Auth::user()->name }}</a>
             </li>
         </ul>
     </nav>
@@ -75,6 +75,17 @@
                             <p>Đơn hàng</p>
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a href="{{ route('logout') }}" class="nav-link"
+                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                        <i class="nav-icon fas fa-sign-out-alt"></i>
+                        <p>Đăng xuất</p>
+                        </a>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            @csrf
+                        </form>
+                    </li>
+
                 </ul>
             </nav>
             <!-- /.sidebar-menu -->

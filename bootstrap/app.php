@@ -21,6 +21,10 @@ return Application::configure(basePath: dirname(__DIR__))
         'verify' => \App\Http\Middleware\CheckAdminMiddleware::class, 
         'verify-register' => \App\Http\Middleware\CheckAdminMiddleware::class, 
         'verify-register2' => \App\Http\Middleware\CheckAdminMiddleware::class,
+        // 'admin' => \App\Http\Middleware\CheckAdmin::class,
+        // 'user' => \App\Http\Middleware\UserMiddleware::class,
+        'admin' => \App\Http\Middleware\AdminMiddleware::class,
+
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
