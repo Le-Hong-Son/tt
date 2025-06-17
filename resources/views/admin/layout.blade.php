@@ -105,7 +105,7 @@
 
     <!-- Main Footer -->
     <footer class="main-footer text-center">
-        <strong>Copyright &copy; {{ date('Y') }} Bản quyền thuộc về bạn.</strong>
+        <strong>Copyright &copy; {{ date('Y') }} Bản quyền thuộc về SOPU.</strong>
     </footer>
 </div>
 

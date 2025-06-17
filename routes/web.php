@@ -13,9 +13,19 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 
 // Trang user
-Route::get('/', function () {
-    return view('user.dashboard');
-})->name('user.home');
+// Route::get('/', function () {
+//     return view('user.dashboard');
+// })->name('user.home');
+
+
+// Client
+use App\Http\Controllers\Client\HomeController;
+
+Route::get('/', [HomeController::class, 'index'])->name('client.home');
+
+use App\Http\Controllers\Client\CategoryController;
+
+Route::get('/danh-muc/{id}', [CategoryController::class, 'show'])->name('client.categories.show');
 
 
 
