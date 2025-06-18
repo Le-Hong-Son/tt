@@ -1,14 +1,9 @@
-<!DOCTYPE html>
-<html lang="vi">
-<head>
-    <meta charset="UTF-8">
-    <title>Đăng ký</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- Bootstrap 5 CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body class="bg-light d-flex align-items-center justify-content-center" style="min-height: 100vh;">
+@extends('layouts.app')
 
+@section('title', 'Đăng ký')
+
+@section('content')
+<div class="bg-light d-flex align-items-center justify-content-center py-5" style="min-height: 80vh;">
     <div class="card shadow p-4" style="width: 100%; max-width: 500px;">
         <h2 class="text-center mb-4">Đăng ký tài khoản</h2>
 
@@ -64,8 +59,5 @@
             <p>Đã có tài khoản? <a href="{{ route('login') }}">Đăng nhập ngay</a></p>
         </div>
     </div>
-
-    <!-- Bootstrap JS Bundle -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
+</div>
+@endsection

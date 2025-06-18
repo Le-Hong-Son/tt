@@ -2,16 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Models\User;
 
 class AuthController extends Controller
 {
     // Hiển thị form đăng nhập
     public function showLogin()
     {
-        return view('auth.login');
+        $categories = Category::all();
+        return view('auth.login', compact('categories'));
     }
 
     // Xử lý đăng nhập
@@ -45,7 +47,8 @@ class AuthController extends Controller
     // Hiển thị form đăng ký (dành cho người dùng bình thường)
     public function showRegister()
     {
-        return view('auth.register');
+        $categories = Category::all();
+        return view('auth.register', compact('categories'));
     }
 
     // Xử lý đăng ký
@@ -88,6 +91,6 @@ class AuthController extends Controller
 
         $request->session()->regenerateToken();
 
-        return redirect('/login');
+        return redirect('/');
     }
 }
