@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\Order;
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Product;
+use App\Models\Order;
+use App\Models\OrderItem;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CartController extends Controller
 {
@@ -75,4 +78,60 @@ class CartController extends Controller
 
         return back()->with('success', 'Đã xóa sản phẩm khỏi giỏ hàng.');
     }
+    public function checkout(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'phone' => 'required|string|max:20',
+            'address' => 'required|string',
+            'payment_method' => 'required|in:cod,bank,momo',
+        ]);
+
+        $cart = session('cart', []);
+        if (empty($cart)) {
+            return redirect()->route('cart.index')->with('error', 'Giỏ hàng trống!');
+        }
+
+        // Tính tổng tiền
+        $total = collect($cart)->sum(fn($item) => $item['price'] * $item['quantity']);
+
+        // Tạo đơn hàng mới
+        $order = Order::create([
+            'user_id' => Auth::check() ? Auth::id() : null,
+            'name' => $request->name,
+            'phone' => $request->phone,
+            'address' => $request->address,
+            'payment_method' => $request->payment_method,
+            'total' => $total,
+            'status' => 'pending', // hoặc 'chờ xác nhận'
+        ]);
+
+        // Tạo các dòng order_items
+        foreach ($cart as $productId => $item) {
+            OrderItem::create([
+                'order_id' => $order->id,
+                'product_id' => $productId,
+                'quantity' => $item['quantity'],
+                'price' => $item['price'],
+            ]);
+        }
+
+        // Xóa giỏ hàng
+        session()->forget('cart');
+
+        return redirect()->route('cart.index')->with('success', 'Đặt hàng thành công!');
+    }
+
+    public function showCheckoutForm()
+    {
+        $cart = session('cart', []);
+
+        if (empty($cart)) {
+            return redirect()->route('cart.index')->with('error', 'Giỏ hàng trống, không thể đặt hàng!');
+        }
+
+        return view('client.checkout', compact('cart'));
+    }
+
+
 }

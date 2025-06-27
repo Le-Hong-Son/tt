@@ -65,9 +65,11 @@
                 </tfoot>
             </table>
 
-            <div class="d-flex justify-content-between">
+            <div class="d-flex justify-content-between mb-3">
                 <a href="{{ url('/') }}" class="btn btn-secondary">← Tiếp tục mua hàng</a>
+                <a href="{{ route('cart.checkout.form') }}" class="btn btn-success">Đặt hàng</a>
             </div>
+
         @else
             <p>Giỏ hàng của bạn đang trống.</p>
             <a href="{{ url('/') }}" class="btn btn-outline-primary">Quay lại trang sản phẩm</a>

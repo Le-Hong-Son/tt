@@ -17,7 +17,8 @@ Route::post('/cart/update', [CartController::class, 'update'])->name('cart.updat
 Route::post('/cart/remove/{productId}', [CartController::class, 'remove'])->name('cart.remove');
 
 Route::post('/cart/add/{product}', [CartController::class, 'add'])->name('cart.add');
-
+Route::post('/checkout', [CartController::class, 'checkout'])->name('cart.checkout');
+Route::get('/checkout', [CartController::class, 'showCheckoutForm'])->name('cart.checkout.form');
 
 // Client
 use App\Http\Controllers\Client\HomeController;
