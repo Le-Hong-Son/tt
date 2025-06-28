@@ -11,7 +11,7 @@ class UserController extends Controller
     // Danh sách user
     public function index()
     {
-        $users = User::all();
+        $users = User::latest()->paginate(5);
         return view('admin.users.index', compact('users'));
     }
 

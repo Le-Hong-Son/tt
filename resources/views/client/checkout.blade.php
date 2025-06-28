@@ -5,7 +5,11 @@
 @section('content')
 <div class="container py-4">
     <h2 class="mb-4">Thanh toán đơn hàng</h2>
-
+    @if (session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
     @if (session('error'))
         <div class="alert alert-danger">{{ session('error') }}</div>
     @endif
@@ -37,8 +41,8 @@
                                 <option value="">-- Chọn phương thức --</option>
                                 <option value="cod">Thanh toán khi nhận hàng (COD)</option>
                                 <option value="bank">Chuyển khoản ngân hàng</option>
-                                {{-- <option value="vnpay">Thanh toán bằng VNPAY</option> --}}
-                                {{-- <option value="momo">Ví điện tử Momo</option> --}}
+                                <option value="vnpay">Thanh toán bằng VNPAY</option>
+                                <option value="momo">Ví điện tử Momo</option>
                             </select>
                             <div id="payment-info" class="mt-2"></div>
                         </div>

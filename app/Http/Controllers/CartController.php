@@ -84,7 +84,7 @@ class CartController extends Controller
             'name' => 'required|string|max:255',
             'phone' => 'required|string|max:20',
             'address' => 'required|string',
-            'payment_method' => 'required|in:cod,bank,momo',
+            'payment_method' => 'required|in:cod,bank,vnpay,momo',
         ]);
 
         $cart = session('cart', []);

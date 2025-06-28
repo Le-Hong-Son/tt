@@ -12,7 +12,7 @@ class ProductController extends Controller
     // Danh sách sản phẩm
     public function index()
     {
-        $products = Product::with('category')->get();
+        $products = Product::with('category')->latest()->paginate(5);
         return view('admin.products.index', compact('products'));
     }
 

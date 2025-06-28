@@ -12,13 +12,16 @@ Route::post('/register', [AuthController::class, 'register'])->name('register.po
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 
-Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
-Route::post('/cart/update', [CartController::class, 'update'])->name('cart.update');
-Route::post('/cart/remove/{productId}', [CartController::class, 'remove'])->name('cart.remove');
+Route::middleware('auth')->group(function () {
+    Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+    Route::post('/cart/update', [CartController::class, 'update'])->name('cart.update');
+    Route::post('/cart/remove/{productId}', [CartController::class, 'remove'])->name('cart.remove');
 
-Route::post('/cart/add/{product}', [CartController::class, 'add'])->name('cart.add');
-Route::post('/checkout', [CartController::class, 'checkout'])->name('cart.checkout');
-Route::get('/checkout', [CartController::class, 'showCheckoutForm'])->name('cart.checkout.form');
+    Route::post('/cart/add/{product}', [CartController::class, 'add'])->name('cart.add');
+    Route::get('/checkout', [CartController::class, 'showCheckoutForm'])->name('cart.checkout.form');
+    Route::post('/checkout', [CartController::class, 'checkout'])->name('cart.checkout');
+});
+
 
 // Client
 use App\Http\Controllers\Client\HomeController;
@@ -28,6 +31,17 @@ Route::get('/', [HomeController::class, 'index'])->name('client.home');
 use App\Http\Controllers\Client\CategoryController;
 
 Route::get('/danh-muc/{id}', [CategoryController::class, 'show'])->name('client.categories.show');
+
+use App\Http\Controllers\OrderHistoryController;
+
+Route::middleware('auth')->group(function () {
+    Route::get('/orders/history', [OrderHistoryController::class, 'index'])->name('orders.history');
+    Route::get('/lich-su-don-hang', [OrderHistoryController::class, 'index'])->name('client.orders.history');
+    Route::get('/lich-su-don-hang/{id}', [OrderHistoryController::class, 'show'])->name('client.orders.show');
+    Route::put('/orders/{order}/cancel', [OrderHistoryController::class, 'cancel'])->name('orders.cancel');
+    Route::post('/orders/{order}/reorder', [OrderHistoryController::class, 'reorder'])->name('orders.reorder');
+});
+
 
 
 

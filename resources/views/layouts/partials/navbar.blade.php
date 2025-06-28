@@ -66,8 +66,9 @@
                             <span class="d-none d-lg-inline">{{ Auth::user()->name }}</span>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="{{ route('orders.history') }}">Lịch sử đơn hàng</a></li>
                             <li>
-                                <form action="{{ route('logout') }}" method="POST" class="dropdown-item">
+                                <form action="{{ route('logout') }}" method="POST" class="dropdown-item p-0 m-0">
                                     @csrf
                                     <button class="dropdown-item" type="submit">Đăng xuất</button>
                                 </form>
