@@ -22,7 +22,6 @@ class ProductFactory extends Factory
             'price' => $this->faker->randomFloat(2, 1, 100),
             'description' => $this->faker->sentence, // 
             'stock' => $this->faker->numberBetween(0, 100),
-            'is_hot' => $this->faker->boolean,
             'created_at' => $this->faker->dateTime,
             'updated_at' => $this->faker->dateTime,
             'image' => $this->faker->imageUrl,
