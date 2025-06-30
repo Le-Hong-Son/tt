@@ -42,6 +42,9 @@ Route::middleware('auth')->group(function () {
     Route::post('/orders/{order}/reorder', [OrderHistoryController::class, 'reorder'])->name('orders.reorder');
 });
 
+use App\Http\Controllers\Client\ProductController;
+
+Route::get('/san-pham/{id}', [ProductController::class, 'show'])->name('client.products.show');
 
 
 
