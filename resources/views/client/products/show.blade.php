@@ -33,7 +33,62 @@
         </div>
     </div>
 </div>
+
 <hr class="my-5">
+
+{{-- Hiển thị bình luận --}}
+<div class="mt-5">
+    <h4 class="mb-4 text-center text-primary"><i class="bi bi-chat-dots"></i> Bình luận</h4>
+
+    {{-- Form bình luận --}}
+    @auth
+        @if (session('success'))
+            <div class="alert alert-success">{{ session('success') }}</div>
+        @endif
+
+        <form action="{{ route('comments.store') }}" method="POST" class="mb-4 p-3 border rounded shadow-sm bg-light">
+            @csrf
+            <input type="hidden" name="product_id" value="{{ $product->id }}">
+            <div class="form-group mb-3">
+                <textarea name="content" rows="3" class="form-control" placeholder="Viết bình luận của bạn..." required></textarea>
+            </div>
+            <div class="text-end">
+                <button type="submit" class="btn btn-success btn-sm">
+                    <i class="bi bi-send"></i> Gửi bình luận
+                </button>
+            </div>
+        </form>
+    @else
+        <div class="alert alert-info text-center">
+            <i class="bi bi-person-circle"></i> 
+            Vui lòng <a href="{{ route('login') }}">đăng nhập</a> để bình luận.
+        </div>
+    @endauth
+
+    {{-- Danh sách bình luận --}}
+    <div class="comments-list">
+        @forelse ($product->comments()->latest()->get() as $comment)
+            <div class="mb-3 p-3 border rounded shadow-sm bg-white">
+                <div class="d-flex justify-content-between">
+                    <strong>{{ $comment->user->name }}</strong>
+                    <small class="text-muted">
+                        {{ $comment->created_at->format('H:i d/m/Y') }} 
+                        ({{ $comment->created_at->diffForHumans() }})
+                    </small>
+                </div>
+                <p class="mt-2 mb-0 text-muted">{{ $comment->content }}</p>
+            </div>
+        @empty
+            <p class="text-muted text-center">Chưa có bình luận nào cho sản phẩm này.</p>
+        @endforelse
+    </div>
+</div>
+
+
+
+<hr class="my-5">
+
+{{-- Sản phẩm liên quan --}}
 
 <h4 class="mb-4 text-center">Sản phẩm liên quan</h4>
 <div class="row">

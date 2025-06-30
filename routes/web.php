@@ -42,10 +42,15 @@ Route::middleware('auth')->group(function () {
     Route::post('/orders/{order}/reorder', [OrderHistoryController::class, 'reorder'])->name('orders.reorder');
 });
 
+
+// Chi tiết sản phẩm
 use App\Http\Controllers\Client\ProductController;
 
 Route::get('/san-pham/{id}', [ProductController::class, 'show'])->name('client.products.show');
 
+// comment
+
+//Route::post('/comments', [\App\Http\Controllers\Client\CommentController::class, 'store'])->name('comments.store')->middleware('auth');
 
 
 // Trang admin
@@ -58,4 +63,11 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
     Route::resource('categories', \App\Http\Controllers\CategoryController::class);
     Route::resource('users', \App\Http\Controllers\UserController::class);
     Route::resource('orders', \App\Http\Controllers\OrderController::class);
+    Route::resource('comments', \App\Http\Controllers\CommentController::class);
+});
+// Route comment cho client (bình luận sản phẩm)
+use App\Http\Controllers\Client\CommentController;
+
+Route::middleware(['auth'])->group(function () {
+    Route::post('/comments', [CommentController::class, 'store'])->name('comments.store');
 });
