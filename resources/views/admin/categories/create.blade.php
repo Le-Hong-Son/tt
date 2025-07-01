@@ -13,6 +13,7 @@
         </div>
         <div class="card-footer">
             <button type="submit" class="btn btn-primary">Lưu</button>
+            <a href="{{ route('categories.index') }}" class="btn btn-secondary">Quay lại</a>
         </div>
     </form>
 </div>

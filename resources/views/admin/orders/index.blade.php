@@ -1,17 +1,29 @@
 @extends('admin.layout')
+
 @section('title', 'Quản lý đơn hàng')
+
 @section('content')
-<div class="card">
-    <div class="card-header"><h3 class="card-title">Danh sách đơn hàng</h3></div>
-    <div class="card-body p-0">
-        <table class="table table-bordered">
-            <thead>
-                <tr>
-                    <th>ID</th><th>Tên tài khoản</th><th>Tên người nhận hàng</th><th>Tổng tiền</th><th>Trạng thái</th><th>Ngày đặt</th><th>PT Thanh toán</th><th>Hành động</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach($orders as $od)
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2>Danh sách đơn hàng</h2>
+        {{-- Nếu bạn có chức năng thêm đơn hàng thủ công --}}
+        {{-- <a href="{{ route('orders.create') }}" class="btn btn-primary">Thêm đơn hàng</a> --}}
+    </div>
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Tên tài khoản</th>
+                <th>Người nhận</th>
+                <th>Tổng tiền</th>
+                <th>Trạng thái</th>
+                <th>Ngày đặt</th>
+                <th>Thanh toán</th>
+                <th>Hành động</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach($orders as $od)
                 <tr>
                     <td>{{ $od->id }}</td>
                     <td>{{ $od->user->name ?? 'Ẩn' }}</td>
@@ -46,21 +58,19 @@
                         @endswitch
                     </td>
                     <td>
-                        <a href="{{ route('orders.show', $od) }}" class="btn btn-info btn-sm">Chi tiết</a>
-                        <a href="{{ route('orders.edit', $od) }}" class="btn btn-warning btn-sm">Sửa</a>
-                        <form action="{{ route('orders.destroy', $od) }}" method="POST" class="d-inline">
+                        <a href="{{ route('orders.show', $od) }}" class="btn btn-info btn-sm me-1">Chi tiết</a>
+                        <a href="{{ route('orders.edit', $od) }}" class="btn btn-warning btn-sm me-1">Sửa</a>
+                        <form action="{{ route('orders.destroy', $od) }}" method="POST" class="d-inline" onsubmit="return confirm('Xóa?')">
                             @csrf @method('DELETE')
-                            <button class="btn btn-danger btn-sm" onclick="return confirm('Xóa?')">Xóa</button>
+                            <button class="btn btn-danger btn-sm">Xóa</button>
                         </form>
                     </td>
                 </tr>
-                @endforeach
-            </tbody>
-        </table>
-        <div class="card-footer d-flex justify-content-center">
-            {{ $orders->links() }}
-        </div>
+            @endforeach
+        </tbody>
+    </table>
 
+    <div class="d-flex justify-content-center mt-3">
+        {{ $orders->links() }}
     </div>
-</div>
 @endsection

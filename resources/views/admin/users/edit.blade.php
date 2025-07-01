@@ -21,5 +21,6 @@
         </select>
     </div>
     <button type="submit" class="btn btn-success">Cập nhật</button>
+    <a href="{{ route('users.index') }}" class="btn btn-secondary">Hủy</a>
 </form>
 @endsection

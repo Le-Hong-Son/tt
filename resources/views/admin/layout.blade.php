@@ -76,7 +76,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ route('comments.index') }}" class="nav-link">
+                        <a href="{{ route('admin.comments.index') }}" class="nav-link">
                             <i class="nav-icon fas fa-comments"></i>
                             <p>Bình luận</p>
                         </a>

@@ -18,6 +18,7 @@
         </div>
         <div class="card-footer">
             <button type="submit" class="btn btn-warning">Cập nhật</button>
+            <a href="{{ route('orders.index') }}" class="btn btn-secondary">Quay lại</a>
         </div>
     </form>
 </div>

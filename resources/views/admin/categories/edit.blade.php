@@ -13,6 +13,7 @@
         </div>
         <div class="card-footer">
             <button type="submit" class="btn btn-warning">Cập nhật</button>
+            <a href="{{ route('categories.index') }}" class="btn btn-secondary">Hủy</a>
         </div>
     </form>
 </div>

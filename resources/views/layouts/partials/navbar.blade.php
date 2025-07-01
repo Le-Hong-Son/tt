@@ -1,7 +1,8 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #F2F0EC;">
+
     <div class="container">
         <a class="navbar-brand d-flex align-items-center" href="{{ url('/') }}">
-            <img src="{{ asset('images/logo.png') }}" alt="SOPU" width="30" class="me-2"> SOPU
+            <img src="{{ asset('images/logo.png') }}" alt="SOPU" width="60" class="me-2"> SOPU
         </a>
 
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">

@@ -3,14 +3,17 @@
 @section('title', 'Quản lý bình luận')
 
 @section('content')
-<div class="container">
-    <h2 class="mb-4">Danh sách bình luận</h2>
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2>Danh sách bình luận</h2>
+        {{-- Nếu cần nút thêm mới bình luận cho Admin --}}
+        <a href="{{ route('admin.comments.create') }}" class="btn btn-primary">Thêm bình luận</a>
+    </div>
 
     @if(session('success'))
         <div class="alert alert-success">{{ session('success') }}</div>
     @endif
 
-    <table class="table table-bordered table-hover">
+    <table class="table table-bordered">
         <thead>
             <tr>
                 <th>ID</th>
@@ -30,7 +33,8 @@
                     <td>{{ $comment->content }}</td>
                     <td>{{ $comment->created_at->format('H:i d/m/Y') }}</td>
                     <td>
-                        <form action="{{ route('comments.destroy', $comment) }}" method="POST" onsubmit="return confirm('Xóa bình luận này?')">
+                        <a href="{{ route('admin.comments.edit', $comment) }}" class="btn btn-warning btn-sm me-1">Sửa</a>
+                        <form action="{{ route('admin.comments.destroy', $comment) }}" method="POST" class="d-inline" onsubmit="return confirm('Xóa bình luận này?')">
                             @csrf
                             @method('DELETE')
                             <button class="btn btn-danger btn-sm">Xóa</button>
@@ -41,6 +45,7 @@
         </tbody>
     </table>
 
-    {{ $comments->links() }}
-</div>
+    <div class="d-flex justify-content-center mt-3">
+        {{ $comments->links() }}
+    </div>
 @endsection

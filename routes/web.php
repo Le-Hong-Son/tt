@@ -63,7 +63,7 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
     Route::resource('categories', \App\Http\Controllers\CategoryController::class);
     Route::resource('users', \App\Http\Controllers\UserController::class);
     Route::resource('orders', \App\Http\Controllers\OrderController::class);
-    Route::resource('comments', \App\Http\Controllers\CommentController::class);
+    Route::resource('comments', \App\Http\Controllers\CommentController::class)->names('admin.comments');;
 });
 // Route comment cho client (bình luận sản phẩm)
 use App\Http\Controllers\Client\CommentController;

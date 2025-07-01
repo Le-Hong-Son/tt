@@ -24,5 +24,6 @@
         </select>
     </div>
     <button type="submit" class="btn btn-primary">Thêm</button>
+    <a href="{{ route('users.index') }}" class="btn btn-secondary">Quay lại</a>
 </form>
 @endsection
