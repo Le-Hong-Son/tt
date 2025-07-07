@@ -71,3 +71,11 @@ use App\Http\Controllers\Client\CommentController;
 Route::middleware(['auth'])->group(function () {
     Route::post('/comments', [CommentController::class, 'store'])->name('comments.store');
 });
+
+
+// Tra cứu đơn hàng
+use App\Http\Controllers\Client\OrderLookupController;
+
+Route::get('/tra-cuu-don-hang', [OrderLookupController::class, 'showForm'])->name('client.order.lookup.form');
+Route::post('/tra-cuu-don-hang', [OrderLookupController::class, 'lookup'])->name('client.order.lookup');
+
