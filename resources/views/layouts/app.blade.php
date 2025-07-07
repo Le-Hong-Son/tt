@@ -45,6 +45,7 @@
     @stack('scripts')
 
     <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
     <df-messenger intent="WELCOME" chat-title="banmohinh" agent-id="14217097-d5c2-40a5-8edd-919f731dde17"
         language-code="vi"></df-messenger>
