@@ -47,8 +47,8 @@ class OrderHistoryController extends Controller
             abort(403);
         }
 
-        if ($order->status !== 'cancelled') {
-            return back()->with('error', 'Chỉ có thể đặt lại đơn hàng đã hủy.');
+        if (!in_array($order->status, ['cancelled', 'shipped'])) {
+            return back()->with('error', 'Chỉ có thể đặt lại đơn hàng đã hủy hoặc đã giao.');
         }
 
         // Đưa các sản phẩm vào giỏ hàng

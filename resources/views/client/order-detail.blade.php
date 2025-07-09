@@ -95,10 +95,11 @@
                 <button type="submit" class="btn btn-danger">Hủy đơn hàng</button>
             </form>
         @endif
-        @if ($order->status === 'cancelled')
+        
+        @if (in_array($order->status, ['cancelled', 'shipped']))
             <form action="{{ route('orders.reorder', $order->id) }}" method="POST" class="text-end">
                 @csrf
-                <button type="submit" class="btn btn-success">Đặt lại đơn hàng</button>
+                <button type="submit" class="btn btn-success">Mua lại</button> 
             </form>
         @endif
 
