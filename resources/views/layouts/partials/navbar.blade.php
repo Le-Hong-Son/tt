@@ -67,6 +67,7 @@
                             <span class="d-none d-lg-inline">{{ Auth::user()->name }}</span>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="{{ route('client.profile.show') }}">Hồ sơ cá nhân</a></li>
                             <li><a class="dropdown-item" href="{{ route('orders.history') }}">Lịch sử đơn hàng</a></li>
                             <li>
                                 <form action="{{ route('logout') }}" method="POST" class="dropdown-item p-0 m-0">
@@ -88,6 +89,14 @@
                         </ul>
                     </li>
                 @endif
+                <li class="nav-item">
+                    <form action="{{ route('client.products.search') }}" method="GET" class="d-flex" role="search">
+                        <input class="form-control me-2" type="search" name="keyword" placeholder="Tìm kiếm sản phẩm..." aria-label="Search">
+                        <button class="btn btn-outline-dark" type="submit">
+                            <i class="bi bi-search"></i>
+                        </button>
+                    </form>
+                </li>
 
             </ul>
         </div>

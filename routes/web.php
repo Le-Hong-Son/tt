@@ -65,6 +65,18 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
     Route::resource('orders', \App\Http\Controllers\OrderController::class);
     Route::resource('comments', \App\Http\Controllers\CommentController::class)->names('admin.comments');;
 });
+
+
+use App\Http\Controllers\Client\ProfileController;
+
+Route::middleware('auth')->prefix('ho-so')->group(function () {
+    Route::get('/', [ProfileController::class, 'show'])->name('client.profile.show');
+    Route::get('/sua', [ProfileController::class, 'edit'])->name('client.profile.edit');
+    Route::post('/cap-nhat', [ProfileController::class, 'update'])->name('client.profile.update');
+});
+
+
+
 // Route comment cho client (bình luận sản phẩm)
 use App\Http\Controllers\Client\CommentController;
 
@@ -79,3 +91,6 @@ use App\Http\Controllers\Client\OrderLookupController;
 Route::get('/tra-cuu-don-hang', [OrderLookupController::class, 'showForm'])->name('client.order.lookup.form');
 Route::post('/tra-cuu-don-hang', [OrderLookupController::class, 'lookup'])->name('client.order.lookup');
 
+
+// Tìm kiếm sản phẩm
+Route::get('/tim-kiem', [App\Http\Controllers\Client\ProductController::class, 'search'])->name('client.products.search');

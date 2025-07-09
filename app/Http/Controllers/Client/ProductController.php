@@ -22,6 +22,18 @@ class ProductController extends Controller
         return view('client.products.show', compact('product', 'relatedProducts'));
     }
 
+    // Tìm kiếm sản phẩm
+    public function search(Request $request)
+    {
+        $keyword = $request->input('keyword');
+
+        $products = Product::where('name', 'like', '%' . $keyword . '%')
+            ->orWhere('description', 'like', '%' . $keyword . '%')
+            ->paginate(12);
+
+        return view('client.products.search_results', compact('products', 'keyword'));
+    }
+
 }
 
 
